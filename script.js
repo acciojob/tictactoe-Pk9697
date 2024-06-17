@@ -48,7 +48,7 @@ function get1DCoordinates(x, y) {
 function checkDiagonal1(idx) {
 	const [x, y] = get2DCoordinates(idx)
 	if (x != y) return false
-	const checkWithMark = isPlayer1Turn ? 'X' : 'O'
+	const checkWithMark = isPlayer1Turn ? 'x' : 'o'
 	const colorIndexes = new Set()
 
 	let i = 0,
@@ -68,7 +68,7 @@ function checkDiagonal1(idx) {
 function checkDiagonal2(idx) {
 	const [x, y] = get2DCoordinates(idx)
 	if (x + y != 2) return false
-	const checkWithMark = isPlayer1Turn ? 'X' : 'O'
+	const checkWithMark = isPlayer1Turn ? 'x' : 'o'
 	const colorIndexes = new Set()
 
 	let i = 2,
@@ -99,7 +99,7 @@ function checkVertical(idx) {
 
 	let i = 0,
 		j = y
-	const checkWithMark = isPlayer1Turn ? 'X' : 'O'
+	const checkWithMark = isPlayer1Turn ? 'x' : 'o'
 
 	while (i < 3) {
 		const boxIdx = get1DCoordinates(i, j)
@@ -118,7 +118,7 @@ function checkHorizontal(idx) {
 
 	let i = x,
 		j = 0
-	const checkWithMark = isPlayer1Turn ? 'X' : 'O'
+	const checkWithMark = isPlayer1Turn ? 'x' : 'o'
 
 	while (j < 3) {
 		const boxIdx = get1DCoordinates(i, j)
@@ -149,7 +149,7 @@ function checkIfWon(idx) {
 function markBox(idx) {
 	if (boxesData[idx]) return
 	console.log(`Box ${idx} clicked`)
-	const markWith = isPlayer1Turn ? 'X' : 'O'
+	const markWith = isPlayer1Turn ? 'x' : 'o'
 	boxesData = boxesData.map((box, i) => (i === idx ? markWith : box))
 	renderBoxes()
 
@@ -159,9 +159,13 @@ function markBox(idx) {
 			isPlayer1Turn ? player1 : player2
 		}, you're up`
 	} else {
+	// 	playerTurnMessage.innerText = `${
+	// 		isPlayer1Turn ? player1 : player2
+	// 	} congratulations you won!`
+	// }
 		playerTurnMessage.innerText = `${
-			isPlayer1Turn ? player1 : player2
-		}, congratulations you won!`
+			isPlayer1Turn ? 'Player1' : 'Player2'
+		} congratulations you won!`
 	}
 }
 
