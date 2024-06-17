@@ -170,8 +170,8 @@ form.addEventListener('submit', handleSubmit)
 function handleSubmit(e) {
 	e.preventDefault()
 	console.log(`Submitted`)
-	player1 = document.getElementById('player-1').value
-	player2 = document.getElementById('player-2').value
+	player1 = document.getElementById('player1').value
+	player2 = document.getElementById('player2').value
 	board.style.display = 'block'
 	section1.style.display = 'none'
 	playerTurnMessage.innerText = `${player1}, you're up`
