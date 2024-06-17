@@ -6,11 +6,11 @@ const playerTurnMessage = document.getElementById('message')
 const board = document.getElementById('board')
 const section1 = document.getElementById('section-1')
 
-let player1 = null
+let player1 = null 
 let player2 = null
 let isPlayer1Turn = true
 
-board.style.display = 'none'
+// board.style.display = 'none'
 
 function colorBoxes(colorIndexes) {
 	gridBox.innerHTML = boxesData
@@ -172,7 +172,7 @@ function handleSubmit(e) {
 	console.log(`Submitted`)
 	player1 = document.getElementById('player1').value
 	player2 = document.getElementById('player2').value
-	board.style.display = 'block'
-	section1.style.display = 'none'
+	// board.style.display = 'block'
+	// section1.style.display = 'none'
 	playerTurnMessage.innerText = `${player1}, you're up`
 }
