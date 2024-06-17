@@ -24,8 +24,82 @@ function renderBoxes() {
  
 renderBoxes() 
 
-function checkIfWon() {
-	
+function get2DCoordinates(idx) {
+	return [parseInt(idx/3),idx%3]
+}
+function get1DCoordinates(x,y) {
+	return x*3+y
+}
+
+function checkDiagonal(idx) {
+	const [x,y]=get2DCoordinates(idx)
+	if(x!=y || x+y!=2) return false;
+	const checkWithMark=isPlayer1Turn?'X':'O'
+	if(x==y){
+		let i=0,j=0,flag=true
+		while(i++<3 && j++<3){
+			const boxIdx=get1DCoordinates(i,j)
+			if(boxesData[boxIdx]!==checkWithMark){
+				flag=false
+				break
+			}
+		}
+		if(flag){
+			return true
+		}
+		
+	}
+
+	if(x+y==2){
+		let i=2,j=0,flag=true
+		while(i-->=0 && j++<3){
+			const boxIdx=get1DCoordinates(i,j)
+			if(boxesData[boxIdx]!==checkWithMark){
+				flag=false
+				break
+			}
+		}
+		if(flag){
+			return true
+		}
+	}
+
+	return false
+}
+
+function checkVertical(idx) {
+	const [x,y]=get2DCoordinates(idx)
+
+	let i=0,j=y
+	const checkWithMark=isPlayer1Turn?'X':'O'
+
+	while(i++<3){
+		if(boxesData[i][j]!==checkWithMark){
+			return false
+		}
+	}
+
+	return true;
+}
+function checkHorizontal(idx) {
+	const [x,y]=get2DCoordinates(idx)
+
+	let i=x,j=0
+	const checkWithMark=isPlayer1Turn?'X':'O'
+
+	while(j++<3){
+		if(boxesData[i][j]!==checkWithMark){
+			return false
+		}
+	}
+	return true;
+}
+
+function checkIfWon(idx) {
+	if(checkDiagonal(idx) || checkVertical(idx) || checkHorizontal(idx)) {
+		return true
+	}
+	return false
 }
  
 function markBox(idx) {
@@ -34,7 +108,8 @@ function markBox(idx) {
 	const markWith=isPlayer1Turn?'X':'O'
 	boxesData=boxesData.map((box,i)=>(i===idx)?markWith:box)
 	renderBoxes()
-	checkIfWon()
+	
+	checkIfWon(idx)
 	isPlayer1Turn=!isPlayer1Turn
 	playerTurnMessage.innerText=`${isPlayer1Turn?player1:player2}, you're up`
 }
